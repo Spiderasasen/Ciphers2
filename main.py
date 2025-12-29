@@ -1,5 +1,6 @@
 from typing import List
 
+#checking the majoirty for the help of binary and ceaser
 def checkingMajority(cipher: str) -> bool:
     ceaser: List[str] = [] #empty ceaser cipher list
     binary: List[str] = [] #empty binary list
@@ -15,6 +16,18 @@ def checkingMajority(cipher: str) -> bool:
     else: #if binary has the majoity, returns false
         return False
 
+#binary decorder
+def decode_binary(binary: str) -> str:
+    #splits the spaces and new lines
+    bits = binary.split()
+
+    decoded_chars = []
+    for b in bits:
+        #converts each 8-bit chunk to a int, then to a char
+        decoded_chars.append(chr(int(b, 2)))
+
+    return "".join(decoded_chars)
+
 if __name__ == '__main__':
     cipher: str = input("Please enter the cipher here\n")
 
@@ -28,5 +41,6 @@ if __name__ == '__main__':
             print("No, its ceaser")
         else:
             print("yes, its binary")
+            print(decode_binary(cipher))
     else:
         print("ceaser")
