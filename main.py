@@ -37,6 +37,23 @@ def decode_base64(base: str) -> str:
     except Exception:
         return "[ERROR] Could not decode message in Base 64"
 
+#ceaser cipher decoder
+def decode_caesar(text: str, shift: int) -> str:
+    result = []
+
+    for char in text:
+        if char.isalpha():
+            # Determine if it's uppercase or lowercase
+            base = ord('A') if char.isupper() else ord('a')
+            # Shift backwards to decode
+            decoded = chr((ord(char) - base - shift) % 26 + base)
+            result.append(decoded)
+        else:
+            # Non-letters stay the same
+            result.append(char)
+
+    return "".join(result)
+
 if __name__ == '__main__':
     cipher: str = input("Please enter the cipher here\n")
 
@@ -49,8 +66,10 @@ if __name__ == '__main__':
         #checks the majoirty of chars in the cipher to see which cipher to use
         if checkingMajority(cipher):
             print("No, its ceaser")
+            print(decode_caesar(cipher, 7))
         else:
             print("yes, its binary")
             print(decode_binary(cipher))
     else:
         print("ceaser")
+        print(decode_caesar(cipher, 7))
