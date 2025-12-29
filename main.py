@@ -1,4 +1,5 @@
 from typing import List
+import base64
 
 #checking the majoirty for the help of binary and ceaser
 def checkingMajority(cipher: str) -> bool:
@@ -28,11 +29,20 @@ def decode_binary(binary: str) -> str:
 
     return "".join(decoded_chars)
 
+#base64 decoder
+def decode_base64(base: str) -> str:
+    try:
+        decoded_bytes = base64.b64decode(base)
+        return decoded_bytes.decode('utf-8')
+    except Exception:
+        return "[ERROR] Could not decode message in Base 64"
+
 if __name__ == '__main__':
     cipher: str = input("Please enter the cipher here\n")
 
     if "=" in cipher:
         print("base64")
+        print(decode_base64(cipher))
     elif ("0" in cipher) and ("1" in cipher):
         print("binary?")
 
